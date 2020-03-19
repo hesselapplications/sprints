@@ -10,14 +10,17 @@ const routes = [
   },
   {
     path: "/tasks",
+    name: "Tasks",
     component: () => import("../views/Tasks.vue")
   },
   {
     path: "/sprints",
+    name: "Sprints",
     component: () => import("../views/Sprints.vue")
   },
   {
     path: "/sprints/new",
+    name: "New Sprint",
     component: () => import("../views/EditSprint.vue")
   }
 ]
