@@ -51,7 +51,6 @@ export default {
   },
   watch: {
     selectedItems() {
-      console.log("meh")
       this.$refs.currentSprint.updateAll(true);
     }
   },
