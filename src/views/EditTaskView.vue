@@ -1,15 +1,17 @@
 <template>
   <v-container v-if="task">
     <v-row justify="center">
-      <v-col xl="6" lg="8" md="10" cols="12">
-        <v-card>
+      <!-- BREADCRUMBS -->
+      <v-col cols="12">
+        <v-card color="grey lighten-4">
           <task-breadcrumbs :id="id"></task-breadcrumbs>
         </v-card>
+      </v-col>
 
-        <br />
-
+      <v-col lg="6" cols="12">
+        <!-- TASK -->
         <v-card>
-          <v-toolbar flat>
+          <v-toolbar flat color="grey lighten-4">
             <v-toolbar-title class="title">Task</v-toolbar-title>
           </v-toolbar>
 
@@ -17,11 +19,12 @@
 
           <edit-task :task="task"></edit-task>
         </v-card>
+      </v-col>
 
-        <br />
-
+      <!-- SUBTASKS -->
+      <v-col lg="6" cols="12">
         <v-card>
-          <v-toolbar flat class="mr-2">
+          <v-toolbar flat class="pr-2" color="grey lighten-4">
             <v-toolbar-title class="title">Subtasks</v-toolbar-title>
             <v-spacer></v-spacer>
             <task-counter class="mr-2" :numTasks="children.length"></task-counter>
