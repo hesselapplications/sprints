@@ -1,7 +1,7 @@
 <template>
   <v-menu left bottom>
     <template v-slot:activator="{ on }">
-      <v-btn icon v-on="on">
+      <v-btn small icon v-on="on">
         <v-icon>mdi-dots-horizontal</v-icon>
       </v-btn>
     </template>

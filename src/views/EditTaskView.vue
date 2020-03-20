@@ -29,7 +29,7 @@
             </v-btn>
           </v-toolbar>
 
-          <v-divider></v-divider>
+          <sub-task-progress :tasks="children"></sub-task-progress>
 
           <tasks :tasks="children"></tasks>
         </v-card>
@@ -40,6 +40,7 @@
 <script>
 import TaskBreadcrumbs from "@/components/task/TaskBreadcrumbs";
 import EditTask from "@/components/task/EditTask";
+import SubTaskProgress from "@/components/task/SubTaskProgress";
 import Tasks from "@/components/task/Tasks";
 import { mapGetters } from "vuex";
 
@@ -47,6 +48,7 @@ export default {
   components: {
     TaskBreadcrumbs,
     EditTask,
+    SubTaskProgress,
     Tasks
   },
   props: {
