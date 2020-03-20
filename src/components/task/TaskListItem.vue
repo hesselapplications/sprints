@@ -1,7 +1,7 @@
 <template>
   <v-list-item @click="goToTask">
     <v-list-item-action>
-      <v-checkbox @click.stop="toggleComplete" v-model="task.complete" :disabled="hasChildren"></v-checkbox>
+      <v-checkbox @click.stop="toggleComplete(task.id)" v-model="task.complete" :disabled="hasChildren" color="light-green"></v-checkbox>
     </v-list-item-action>
 
     <v-list-item-content :class="classes">
@@ -51,12 +51,7 @@ export default {
     }
   },
   methods: {
-    ...mapMutations(["markIdsComplete"]),
-    toggleComplete() {
-      var ids = [this.task.id];
-      var complete = !this.task.complete;
-      this.markIdsComplete({ ids, complete });
-    },
+    ...mapMutations(["toggleComplete"]),
     goToTask() {
       this.$router.push(`/tasks/${this.task.id}`);
     }

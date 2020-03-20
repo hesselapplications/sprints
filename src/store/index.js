@@ -217,8 +217,26 @@ export default new Vuex.Store({
       ids.forEach(id => Vue.delete(state.items, id));
     },
     toggleComplete(state, id) {
-      var item = state.items[id];
-      item.complete = !item.complete;
+
+      function markComplete(task, complete) {
+        if (task == null) {
+          return
+        }
+
+        task.complete = complete;
+
+        var parent = state.items[task.parentId];
+        if (parent) {
+          var siblingsAllComplete = Object.values(state.items)
+            .filter(task => task.parentId == parent.id)
+            .every(task => task.complete);
+  
+          markComplete(parent, siblingsAllComplete);
+        }
+      }
+
+      var task = state.items[id];
+      markComplete(task, !task.complete);
     }
   },
   actions: {},
