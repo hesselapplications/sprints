@@ -8,7 +8,7 @@
       <v-container fluid>
         <v-row justify="center">
           <v-col>
-            <router-view />
+            <router-view :key="$route.fullPath" />
           </v-col>
         </v-row>
       </v-container>
