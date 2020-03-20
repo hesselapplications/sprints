@@ -194,7 +194,7 @@ export default new Vuex.Store({
     }
   },
   mutations: {
-    saveItem(state, item) {
+    saveTask(state, item) {
       delete item.children
 
       var isNew = item.id == null;
@@ -224,6 +224,27 @@ export default new Vuex.Store({
   actions: {},
   modules: {},
   getters: {
+    getTaskWithId: state => id => {
+      return state.items[id];
+    },
+    getTaskChildren: state => id => {
+      return Object.values(state.items).filter(task => task.parentId == id);
+    },
+    getTaskNumChildren: (state, getters) => id => {
+      return getters.getTaskChildren(id).length;
+    },
+    getTaskPath: (state, getters) => id => {
+      var task = getters.getTaskWithId(id);
+      var path = [];
+      while (task != null) {
+        path.unshift(task);
+        task = getters.getTaskWithId(task.parentId);
+      }
+      return path;
+    },
+
+
+
     getItems: state => {
       var items = Object.values(state.items);
       return arrayToTree(items, {

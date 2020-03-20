@@ -9,9 +9,14 @@ const routes = [
     redirect: "/tasks"
   },
   {
+    path: "/tasks/:id",
+    name: "Edit Task",
+    component: () => import("../views/EditTaskView.vue"),
+    props: true
+  },
+  {
     path: "/tasks",
-    name: "Tasks",
-    component: () => import("../views/Tasks.vue")
+    component: () => import("../views/TasksView.vue")
   },
   {
     path: "/sprints",
