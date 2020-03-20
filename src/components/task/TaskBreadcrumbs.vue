@@ -1,6 +1,6 @@
 <template>
-  <v-slide-group>
-    <v-breadcrumbs :items="breadcrumbs">
+  <v-slide-group class="mx-4">
+    <v-breadcrumbs class="px-0" :items="breadcrumbs">
       <template v-slot:divider>
         <v-icon>mdi-chevron-right</v-icon>
       </template>

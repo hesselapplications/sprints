@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container v-if="task">
     <v-row justify="center">
       <v-col xl="6" lg="8" md="10" cols="12">
         <v-card>
@@ -21,15 +21,16 @@
         <br />
 
         <v-card>
-          <v-toolbar flat>
+          <v-toolbar flat class="mr-2">
             <v-toolbar-title class="title">Subtasks</v-toolbar-title>
             <v-spacer></v-spacer>
-            <v-btn small outlined color="primary">
-              <v-icon left>mdi-plus</v-icon>Task
-            </v-btn>
+            <task-counter class="mr-2" :numTasks="children.length"></task-counter>
+            <sub-tasks-menu :task="task"></sub-tasks-menu>
           </v-toolbar>
 
           <sub-task-progress :tasks="children"></sub-task-progress>
+
+          <create-task class="pa-4" :parent-id="id" label="Add a subtask..."></create-task>
 
           <tasks :tasks="children"></tasks>
         </v-card>
@@ -38,18 +39,24 @@
   </v-container>
 </template>
 <script>
+import TaskCounter from "@/components/task/TaskCounter";
 import TaskBreadcrumbs from "@/components/task/TaskBreadcrumbs";
 import EditTask from "@/components/task/EditTask";
+import CreateTask from "@/components/task/CreateTask";
 import SubTaskProgress from "@/components/task/SubTaskProgress";
 import Tasks from "@/components/task/Tasks";
+import SubTasksMenu from "@/components/task/SubTasksMenu";
 import { mapGetters } from "vuex";
 
 export default {
   components: {
+    TaskCounter,
     TaskBreadcrumbs,
     EditTask,
+    CreateTask,
     SubTaskProgress,
-    Tasks
+    Tasks,
+    SubTasksMenu
   },
   props: {
     id: String
@@ -61,6 +68,11 @@ export default {
     },
     children() {
       return this.getTaskChildren(this.id);
+    }
+  },
+  created() {
+    if (this.task == null) {
+      this.$router.push("/tasks");
     }
   }
 };
