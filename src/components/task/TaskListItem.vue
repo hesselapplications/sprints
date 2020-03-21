@@ -1,13 +1,17 @@
 <template>
   <v-list-item @click="goToTask">
     <v-list-item-action>
-      <v-checkbox @click.stop="toggleComplete(task.id)" v-model="task.complete" :disabled="hasChildren" color="light-green"></v-checkbox>
+      <v-icon v-if="hasChildren">mdi-chevron-right</v-icon>
+      <v-checkbox
+        v-else
+        @click.stop="toggleComplete(task.id)"
+        v-model="task.complete"
+        color="light-green"
+      ></v-checkbox>
     </v-list-item-action>
 
     <v-list-item-content :class="classes">
-      <v-list-item-title>
-        {{task.name}}
-      </v-list-item-title>
+      <v-list-item-title>{{task.name}}</v-list-item-title>
     </v-list-item-content>
 
     <v-list-item-action>
@@ -41,7 +45,7 @@ export default {
       return this.getTaskNumChildren(this.task.id);
     },
     hasChildren() {
-      return this.numChildren > 0
+      return this.numChildren > 0;
     },
     classes() {
       return {

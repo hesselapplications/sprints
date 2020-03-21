@@ -31,9 +31,11 @@
             <sub-tasks-menu :task="task"></sub-tasks-menu>
           </v-toolbar>
 
-          <sub-task-progress :tasks="children"></sub-task-progress>
+          <v-divider></v-divider>
 
           <create-task class="pa-4" :parent-id="id" label="Add a subtask..."></create-task>
+          
+          <sub-task-progress v-if="children.length > 0" :tasks="children"></sub-task-progress>
 
           <tasks :tasks="children"></tasks>
         </v-card>
