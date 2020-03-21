@@ -112,28 +112,28 @@ export default new Vuex.Store({
         parentId: null,
         complete: false,
         dueDate: null,
-        name: "BRZ"
+        name: "Experiences"
       },
       "16": {
         id: 16,
         parentId: 15,
-        complete: true,
+        complete: false,
         dueDate: null,
-        name: "Fix USB cable"
+        name: "Drive a supercar"
       },
       "17": {
         id: 17,
         parentId: 15,
         complete: false,
         dueDate: null,
-        name: "Heel / toe pedal spacer"
+        name: "Sensory depravation tank"
       },
       "18": {
         id: 18,
         parentId: 15,
         complete: false,
         dueDate: null,
-        name: "Paint calipers"
+        name: "Sky diving"
       },
       "19": {
         id: 19,
@@ -147,21 +147,21 @@ export default new Vuex.Store({
         parentId: 19,
         complete: false,
         dueDate: null,
-        name: "Go to dog park"
+        name: "Get YMCA membership"
       },
       "21": {
         id: 21,
         parentId: 19,
         complete: false,
         dueDate: null,
-        name: "Get YMCA membership"
+        name: "Go to dog park"
       },
       "22": {
         id: 22,
         parentId: 19,
         complete: false,
         dueDate: null,
-        name: "Join sports league"
+        name: "Join sports leagues"
       },
       "23": {
         id: 23,

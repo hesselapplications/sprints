@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-app-bar color="primary" dark>
-      <v-app-bar-nav-icon></v-app-bar-nav-icon>
+      <!-- <v-app-bar-nav-icon></v-app-bar-nav-icon> -->
 
       <v-toolbar-title>{{$route.name}}</v-toolbar-title>
 
@@ -11,11 +11,11 @@
         <v-icon>mdi-playlist-check</v-icon>
       </v-btn>
 
-      <v-btn icon to="sprints">
+      <!-- <v-btn icon to="sprints">
         <v-icon>mdi-run-fast</v-icon>
-      </v-btn>
+      </v-btn> -->
 
-      <v-menu left bottom>
+      <!-- <v-menu left bottom>
         <template v-slot:activator="{ on }">
           <v-btn icon v-on="on">
             <v-icon>mdi-dots-vertical</v-icon>
@@ -27,7 +27,7 @@
             <v-list-item-title>Option {{ n }}</v-list-item-title>
           </v-list-item>
         </v-list>
-      </v-menu>
+      </v-menu> -->
     </v-app-bar>
   </div>
 </template>

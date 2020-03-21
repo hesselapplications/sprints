@@ -16,18 +16,19 @@ const routes = [
   },
   {
     path: "/tasks",
+    name: "All Tasks",
     component: () => import("../views/TasksView.vue")
   },
-  {
-    path: "/sprints",
-    name: "Sprints",
-    component: () => import("../views/Sprints.vue")
-  },
-  {
-    path: "/sprints/new",
-    name: "New Sprint",
-    component: () => import("../views/EditSprint.vue")
-  }
+  // {
+  //   path: "/sprints",
+  //   name: "Sprints",
+  //   component: () => import("../views/Sprints.vue")
+  // },
+  // {
+  //   path: "/sprints/new",
+  //   name: "New Sprint",
+  //   component: () => import("../views/EditSprint.vue")
+  // }
 ]
 
 const router = new VueRouter({
