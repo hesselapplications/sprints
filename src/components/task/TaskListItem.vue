@@ -1,7 +1,7 @@
 <template>
   <v-list-item @click="goToTask">
     <v-list-item-action>
-      <v-icon v-if="hasChildren">mdi-menu-right</v-icon>
+      <v-icon v-if="hasChildren" color="grey lighten-1">mdi-subdirectory-arrow-right</v-icon>
       <v-checkbox
         v-else
         @click.stop="toggleComplete(task.id)"
