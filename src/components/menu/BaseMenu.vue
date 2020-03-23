@@ -23,7 +23,7 @@
         {{ title }}
       </v-card-title>
       <v-divider></v-divider>
-      <v-list dense>
+      <v-list>
         <v-list-item v-for="(option, index) in options" :key="index" @click="emit(option)">
           <v-list-item-title :class="option.class">{{ option.text }}</v-list-item-title>
         </v-list-item>
