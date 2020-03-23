@@ -24,10 +24,10 @@
       <!-- SUBTASKS -->
       <v-col lg="6" cols="12">
         <v-card>
-          <v-toolbar flat class="pr-2" color="grey lighten-4">
+          <v-toolbar class="pr-3" flat color="grey lighten-4">
             <v-toolbar-title class="title">Subtasks</v-toolbar-title>
             <v-spacer></v-spacer>
-            <task-counter class="mr-2" :numTasks="children.length"></task-counter>
+            <task-counter class="mr-4" :numTasks="numSubTasks"></task-counter>
             <sub-tasks-menu :task="task"></sub-tasks-menu>
           </v-toolbar>
 
@@ -74,6 +74,9 @@ export default {
     },
     children() {
       return taskUtils.getChildren(this.task);
+    },
+    numSubTasks() {
+      return taskUtils.getNumLeafNodes(this.task);
     }
   },
   created() {

@@ -13,16 +13,24 @@
       </v-list-item> -->
 
       <!-- DELETE -->
-      <v-list-item @click="() => {}">
+      <v-list-item @click="deleteTask">
         <v-list-item-title class="red--text">Delete</v-list-item-title>
       </v-list-item>
     </v-list>
   </v-menu>
 </template>
 <script>
+import { mapMutations } from "vuex";
+
 export default {
   props: {
     task: Object
+  },
+  methods: {
+    ...mapMutations(["deleteIds"]),
+    deleteTask() {
+      this.deleteIds([this.task.id]);
+    }
   }
 };
 </script>

@@ -23,7 +23,7 @@
       </v-list-item> -->
 
       <!-- DELETE ALL -->
-      <v-list-item @click="() => {}">
+      <v-list-item @click="deleteAll">
         <v-list-item-title class="red--text">Delete all</v-list-item-title>
       </v-list-item>
 
@@ -35,9 +35,19 @@
   </v-menu>
 </template>
 <script>
+import taskUtils from "@/taskUtils.js"
+import { mapMutations } from "vuex";
+
 export default {
   props: {
     task: Object
+  },
+  methods: {
+    ...mapMutations(["deleteIds"]),
+    deleteAll() {
+      var ids = taskUtils.flattenTree(this.task).map(task => task.id);
+      this.deleteIds(ids);
+    }
   }
 };
 </script>

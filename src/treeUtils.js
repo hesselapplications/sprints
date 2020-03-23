@@ -3,7 +3,6 @@ import {
 } from 'performant-array-to-tree';
 
 export default {
-    // BUILDERS
     buildTrees(flatNodeArray) {
         return arrayToTree(flatNodeArray, {
             dataField: null
@@ -21,7 +20,17 @@ export default {
         rootNodeArray.forEach(addToMap);
         return treeMap;
     },
+    flattenTree(node) {
+        var nodes = [];
 
+        function traverse(node) {
+            nodes.push(node);
+            node.children.forEach(traverse);
+        }
+
+        traverse(node);
+        return nodes;
+    },
     getNode(treeMap, id) {
         return treeMap[id];
     },
