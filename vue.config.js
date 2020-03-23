@@ -3,7 +3,7 @@ module.exports = {
     "vuetify"
   ],
   pwa: {
-    name: "BackTask",
+    name: "Subtasker",
     themeColor: "#7E57C2",
     workboxOptions: {
       skipWaiting: true

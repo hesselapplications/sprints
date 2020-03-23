@@ -1,8 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import {
-  arrayToTree
-} from 'performant-array-to-tree'
+import treeUtils from '@/treeUtils.js'
 
 Vue.use(Vuex)
 
@@ -208,7 +206,10 @@ export default new Vuex.Store({
         Vue.set(state.items, item.id, item);
       }
     },
-    markIdsComplete(state, {ids, complete}) {
+    markIdsComplete(state, {
+      ids,
+      complete
+    }) {
       ids
         .map(id => state.items[id])
         .forEach(item => item.complete = complete);
@@ -230,7 +231,7 @@ export default new Vuex.Store({
           var siblingsAllComplete = Object.values(state.items)
             .filter(task => task.parentId == parent.id)
             .every(task => task.complete);
-  
+
           markComplete(parent, siblingsAllComplete);
         }
       }
@@ -242,56 +243,20 @@ export default new Vuex.Store({
   actions: {},
   modules: {},
   getters: {
-    getTaskWithId: state => id => {
-      return state.items[id];
+    taskTrees: state => {
+      var tasks = Object.values(state.items);
+      return treeUtils.buildTrees(tasks);
     },
-    getTaskChildren: state => id => {
-      return Object.values(state.items).filter(task => task.parentId == id);
+    taskTreeMap: (state, getters) => {
+      return treeUtils.buildTreeMap(getters.taskTrees);
     },
-    getTaskNumChildren: (state, getters) => id => {
-      return getters.getTaskChildren(id).length;
+    getTaskWithId: (state, getters) => id => {
+      return treeUtils.getNode(getters.taskTreeMap, id);
     },
     getTaskPath: (state, getters) => id => {
       var task = getters.getTaskWithId(id);
-      var path = [];
-      while (task != null) {
-        path.unshift(task);
-        task = getters.getTaskWithId(task.parentId);
-      }
-      return path;
+      return treeUtils.getPath(getters.taskTreeMap, task);
     },
 
-
-
-    getItems: state => {
-      var items = Object.values(state.items);
-      return arrayToTree(items, {
-        dataField: null
-      })
-    },
-    getItemsWithIds: state => ids => {
-      return ids.map(id => state.items[id]);
-    },
-    getSubTree: state => ids => {
-      var parentIds = new Set(ids);
-
-      function getParentIds(id) {
-        var item = state.items[id];
-        if (item) {
-          var parentId = item.parentId;
-          if (parentId) {
-            parentIds.add(parentId);
-            getParentIds(parentId);
-          }
-        }
-      }
-
-      ids.forEach(id => getParentIds(id));
-
-      var items = [...parentIds].map(id => state.items[id]);
-      return arrayToTree(items, {
-        dataField: null
-      });
-    }
   }
 })

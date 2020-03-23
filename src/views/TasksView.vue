@@ -13,7 +13,7 @@
 
           <create-task class="pa-4" :parent-id="null" label="Add a task..."></create-task>
           
-          <sub-task-progress v-if="tasks.length > 0" :tasks="tasks"></sub-task-progress>
+          <sub-task-progress :task="rootTask"></sub-task-progress>
 
           <tasks :tasks="tasks"></tasks>
         </v-card>
@@ -36,9 +36,14 @@ export default {
     Tasks
   },
   computed: {
-    ...mapGetters(["getTaskChildren"]),
+    ...mapGetters(["taskTrees"]),
     tasks() {
-      return this.getTaskChildren(null);
+      return this.taskTrees;
+    },
+    rootTask() {
+      return {
+        children: this.tasks
+      };
     }
   }
 };

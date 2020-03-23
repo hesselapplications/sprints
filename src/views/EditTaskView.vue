@@ -35,7 +35,7 @@
 
           <create-task class="pa-4" :parent-id="id" label="Add a subtask..."></create-task>
           
-          <sub-task-progress v-if="children.length > 0" :tasks="children"></sub-task-progress>
+          <sub-task-progress :task="task"></sub-task-progress>
 
           <tasks :tasks="children"></tasks>
         </v-card>
@@ -52,6 +52,7 @@ import SubTaskProgress from "@/components/task/SubTaskProgress";
 import Tasks from "@/components/task/Tasks";
 import SubTasksMenu from "@/components/task/SubTasksMenu";
 import { mapGetters } from "vuex";
+import taskUtils from "@/taskUtils.js"
 
 export default {
   components: {
@@ -67,12 +68,12 @@ export default {
     id: String
   },
   computed: {
-    ...mapGetters(["getTaskWithId", "getTaskChildren"]),
+    ...mapGetters(["getTaskWithId"]),
     task() {
       return this.getTaskWithId(this.id);
     },
     children() {
-      return this.getTaskChildren(this.id);
+      return taskUtils.getChildren(this.task);
     }
   },
   created() {

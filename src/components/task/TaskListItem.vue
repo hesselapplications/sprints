@@ -1,7 +1,7 @@
 <template>
   <v-list-item @click="goToTask">
     <v-list-item-action>
-      <v-icon v-if="hasChildren" color="grey lighten-1">mdi-subdirectory-arrow-right</v-icon>
+      <v-icon v-if="hasSubTasks" color="grey lighten-1">mdi-subdirectory-arrow-right</v-icon>
       <v-checkbox
         v-else
         @click.stop="toggleComplete(task.id)"
@@ -15,11 +15,11 @@
     </v-list-item-content>
 
     <v-list-item-action>
-      <task-counter v-if="hasChildren" :numTasks="numChildren"></task-counter>
+      <task-counter v-if="hasSubTasks" :numTasks="numSubTasks"></task-counter>
     </v-list-item-action>
 
     <v-list-item-action>
-      <sub-tasks-menu v-if="hasChildren" :task="task"></sub-tasks-menu>
+      <sub-tasks-menu v-if="hasSubTasks" :task="task"></sub-tasks-menu>
       <task-menu v-else :task="task"></task-menu>
     </v-list-item-action>
   </v-list-item>
@@ -28,7 +28,8 @@
 import TaskCounter from "@/components/task/TaskCounter";
 import TaskMenu from "@/components/task/TaskMenu";
 import SubTasksMenu from "@/components/task/SubTasksMenu";
-import { mapGetters, mapMutations } from "vuex";
+import { mapMutations } from "vuex";
+import taskUtils from "@/taskUtils.js"
 
 export default {
   components: {
@@ -40,12 +41,11 @@ export default {
     task: Object
   },
   computed: {
-    ...mapGetters(["getTaskNumChildren"]),
-    numChildren() {
-      return this.getTaskNumChildren(this.task.id);
+    numSubTasks() {
+      return taskUtils.getNumLeafNodes(this.task);
     },
-    hasChildren() {
-      return this.numChildren > 0;
+    hasSubTasks() {
+      return this.numSubTasks > 0;
     },
     classes() {
       return {

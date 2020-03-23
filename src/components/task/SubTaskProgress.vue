@@ -6,15 +6,19 @@
     ></v-progress-linear>
 </template>
 <script>
+import taskUtils from "@/taskUtils.js"
 
 export default {
   props: {
-    tasks: Array
+    task: Object
   },
   computed: {
+    subTasks() {
+      return taskUtils.getLeafNodes(this.task);
+    },
     progress() {
-      var total = this.tasks.length;
-      var completed = this.tasks.filter(task => task.complete).length;
+      var total = this.subTasks.length;
+      var completed = this.subTasks.filter(task => task.complete).length;
       var percentComplete = (completed / total) * 100;
       return Math.round(percentComplete);
     }
