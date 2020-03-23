@@ -19,8 +19,10 @@
       </v-btn>
     </template>
     <v-sheet>
-      <v-card-title class="subtitle-2 grey--text">
-        {{ title }}
+      <v-card-title class="subtitle-1 grey--text">
+        <slot name="title" :title="title">
+          {{ title }}
+        </slot>
       </v-card-title>
       <v-divider></v-divider>
       <v-list>
@@ -40,7 +42,7 @@ export default {
   data() {
     return {
       sheet: false
-    }
+    };
   },
   methods: {
     emit(option) {

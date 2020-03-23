@@ -1,14 +1,21 @@
 <template>
-  <base-menu :title="task.name" :options="options" @delete-all="deleteAll"></base-menu>
+  <base-menu :title="task.name" :options="options" @delete-all="deleteAll">
+    <template v-slot:title="{ title }">
+      {{ title }}
+      <task-counter class="ml-3" :numTasks="numSubTasks"></task-counter>
+    </template>
+  </base-menu>
 </template>
 <script>
 import BaseMenu from "@/components/menu/BaseMenu";
-import taskUtils from "@/taskUtils.js"
+import TaskCounter from "@/components/task/TaskCounter";
+import taskUtils from "@/taskUtils.js";
 import { mapMutations } from "vuex";
 
 export default {
   components: {
-    BaseMenu
+    BaseMenu,
+    TaskCounter
   },
   props: {
     task: Object
@@ -42,6 +49,11 @@ export default {
           class: "red--text"
         }
       ]
+    };
+  },
+  computed: {
+    numSubTasks() {
+      return taskUtils.getNumLeafNodes(this.task);
     }
   },
   methods: {
