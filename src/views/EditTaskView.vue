@@ -50,7 +50,7 @@ import EditTask from "@/components/task/EditTask";
 import CreateTask from "@/components/task/CreateTask";
 import SubTaskProgress from "@/components/task/SubTaskProgress";
 import Tasks from "@/components/task/Tasks";
-import SubTasksMenu from "@/components/task/SubTasksMenu";
+import SubTasksMenu from "@/components/menu/SubTasksMenu";
 import { mapGetters } from "vuex";
 import taskUtils from "@/taskUtils.js"
 

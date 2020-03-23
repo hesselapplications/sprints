@@ -24,7 +24,7 @@
 </template>
 <script>
 import CreateTask from "@/components/task/CreateTask";
-import SubTasksMenu from "@/components/task/SubTasksMenu";
+import SubTasksMenu from "@/components/menu/SubTasksMenu";
 import SubTaskProgress from "@/components/task/SubTaskProgress";
 import TaskCounter from "@/components/task/TaskCounter";
 import Tasks from "@/components/task/Tasks";

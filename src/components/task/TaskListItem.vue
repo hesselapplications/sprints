@@ -26,8 +26,8 @@
 </template>
 <script>
 import TaskCounter from "@/components/task/TaskCounter";
-import TaskMenu from "@/components/task/TaskMenu";
-import SubTasksMenu from "@/components/task/SubTasksMenu";
+import TaskMenu from "@/components/menu/TaskMenu";
+import SubTasksMenu from "@/components/menu/SubTasksMenu";
 import { mapMutations } from "vuex";
 import taskUtils from "@/taskUtils.js"
 
