@@ -7,7 +7,7 @@
             <v-toolbar-title class="title">Tasks</v-toolbar-title>
             <v-spacer></v-spacer>
             <task-counter class="mr-4" :numTasks="numSubTasks"></task-counter>
-            <sub-tasks-menu></sub-tasks-menu>
+            <sub-tasks-menu :task="rootTask"></sub-tasks-menu>
           </v-toolbar>
 
           <v-divider></v-divider>

@@ -32,13 +32,13 @@ export default {
         //   class: null
         // },
         {
-          text: "Delete all",
-          emit: "delete-all",
+          text: "Delete completed",
+          emit: "delete-completed",
           class: "red--text"
         },
         {
-          text: "Delete completed",
-          emit: "delete-completed",
+          text: "Delete all",
+          emit: "delete-all",
           class: "red--text"
         }
       ]
