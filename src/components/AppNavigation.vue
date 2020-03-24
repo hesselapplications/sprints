@@ -11,9 +11,9 @@
         <v-icon>mdi-playlist-check</v-icon>
       </v-btn>
 
-      <!-- <v-btn icon to="sprints">
+      <v-btn icon to="sprints">
         <v-icon>mdi-run-fast</v-icon>
-      </v-btn> -->
+      </v-btn>
 
       <!-- <v-menu left bottom>
         <template v-slot:activator="{ on }">

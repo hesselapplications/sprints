@@ -1,0 +1,16 @@
+<template>
+  <v-bottom-navigation shift grow background-color="primary" dark>
+    <v-btn to="/tasks">
+      <span>Tasks</span>
+      <v-icon>mdi-playlist-check</v-icon>
+    </v-btn>
+
+    <v-btn to="/sprints">
+      <span>Sprint</span>
+      <v-icon>mdi-run-fast</v-icon>
+    </v-btn>
+  </v-bottom-navigation>
+</template>
+<script>
+export default {};
+</script>
