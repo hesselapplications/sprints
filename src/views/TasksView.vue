@@ -46,6 +46,7 @@ export default {
     },
     rootTask() {
       return {
+        name: "All Tasks",
         children: this.tasks
       };
     },

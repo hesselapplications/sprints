@@ -5,7 +5,7 @@
 
     <!-- CONTENT -->
     <v-content transition="slide-x-transition" class="grey lighten-2">
-      <v-container fluid>
+      <v-container fluid class="app-container">
         <v-row justify="center" no-gutters>
           <v-col>
             <router-view :key="$route.fullPath" />
@@ -28,3 +28,8 @@ export default {
   }
 };
 </script>
+<style scoped>
+.app-container {
+  padding-top: 0px;
+}
+</style>
