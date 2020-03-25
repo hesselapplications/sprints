@@ -14,6 +14,10 @@
       <v-list-item-title>{{task.name}}</v-list-item-title>
     </v-list-item-content>
 
+    <v-list-item-action class="mr-4">
+      <sub-task-progress v-if="hasSubTasks" :task="task"></sub-task-progress>
+    </v-list-item-action>
+
     <v-list-item-action>
       <task-counter v-if="hasSubTasks" :numTasks="numSubTasks"></task-counter>
     </v-list-item-action>
@@ -26,15 +30,17 @@
 </template>
 <script>
 import TaskCounter from "@/components/task/TaskCounter";
+import SubTaskProgress from "@/components/task/SubTaskProgress";
 import TaskMenu from "@/components/menu/TaskMenu";
 import SubTasksMenu from "@/components/menu/SubTasksMenu";
 import { mapMutations } from "vuex";
-import taskUtils from "@/taskUtils.js"
+import taskUtils from "@/taskUtils.js";
 
 export default {
   components: {
     TaskCounter,
     TaskMenu,
+    SubTaskProgress,
     SubTasksMenu
   },
   props: {
@@ -62,8 +68,3 @@ export default {
   }
 };
 </script>
-<style scoped>
-.complete {
-  text-decoration: line-through;
-}
-</style>

@@ -29,6 +29,8 @@
           <v-toolbar class="pr-3" flat color="grey lighten-4">
             <v-toolbar-title class="title">Subtasks</v-toolbar-title>
             <v-spacer></v-spacer>
+
+            <sub-task-progress class="mr-4" :task="task"></sub-task-progress>
             <task-counter class="mr-4" :numTasks="numSubTasks"></task-counter>
             <sub-tasks-menu :task="task"></sub-tasks-menu>
           </v-toolbar>
@@ -37,7 +39,7 @@
 
           <create-task class="pa-4" :parent-id="id" label="Add a subtask..."></create-task>
 
-          <sub-task-progress :task="task"></sub-task-progress>
+          <v-divider></v-divider>
 
           <tasks :tasks="children"></tasks>
         </v-card>

@@ -6,6 +6,8 @@
           <v-toolbar class="pr-3" flat color="grey lighten-4">
             <v-toolbar-title class="title">Tasks</v-toolbar-title>
             <v-spacer></v-spacer>
+
+            <sub-task-progress class="mr-4" :task="rootTask"></sub-task-progress>
             <task-counter class="mr-4" :numTasks="numSubTasks"></task-counter>
             <sub-tasks-menu :task="rootTask"></sub-tasks-menu>
           </v-toolbar>
@@ -13,9 +15,8 @@
           <v-divider></v-divider>
 
           <create-task class="pa-4" :parent-id="null" label="Add a task..."></create-task>
-          
-          <sub-task-progress :task="rootTask"></sub-task-progress>
 
+          <v-divider></v-divider>
           <tasks :tasks="tasks"></tasks>
         </v-card>
       </v-col>
@@ -29,7 +30,7 @@ import SubTaskProgress from "@/components/task/SubTaskProgress";
 import TaskCounter from "@/components/task/TaskCounter";
 import Tasks from "@/components/task/Tasks";
 import { mapGetters } from "vuex";
-import taskUtils from "@/taskUtils.js"
+import taskUtils from "@/taskUtils.js";
 
 export default {
   components: {
