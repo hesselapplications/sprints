@@ -41,7 +41,7 @@
 
           <v-divider></v-divider>
 
-          <tasks :tasks="children"></tasks>
+          <sub-task-list :task="task"></sub-task-list>
         </v-card>
       </v-col>
     </v-row>
@@ -53,7 +53,7 @@ import TaskBreadcrumbs from "@/components/task/TaskBreadcrumbs";
 import EditTask from "@/components/task/EditTask";
 import CreateTask from "@/components/task/CreateTask";
 import SubTaskProgress from "@/components/task/SubTaskProgress";
-import Tasks from "@/components/task/Tasks";
+import SubTaskList from "@/components/task/SubTaskList";
 import TaskMenu from "@/components/menu/TaskMenu";
 import SubTasksMenu from "@/components/menu/SubTasksMenu";
 import { mapGetters } from "vuex";
@@ -66,7 +66,7 @@ export default {
     EditTask,
     CreateTask,
     SubTaskProgress,
-    Tasks,
+    SubTaskList,
     TaskMenu,
     SubTasksMenu
   },
@@ -77,9 +77,6 @@ export default {
     ...mapGetters(["getTaskWithId"]),
     task() {
       return this.getTaskWithId(this.id);
-    },
-    children() {
-      return taskUtils.getChildren(this.task);
     },
     numSubTasks() {
       return taskUtils.getNumLeafNodes(this.task);

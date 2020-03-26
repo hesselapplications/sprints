@@ -55,8 +55,7 @@ export default {
     },
     classes() {
       return {
-        complete: this.task.complete,
-        "grey--text text--lighten-1": this.task.complete
+        "complete": this.task.complete
       };
     }
   },
@@ -68,3 +67,9 @@ export default {
   }
 };
 </script>
+<style scoped>
+.complete {
+  color: #9e9e9e;
+  text-decoration: line-through;
+}
+</style>

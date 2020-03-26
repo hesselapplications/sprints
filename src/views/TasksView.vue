@@ -17,7 +17,7 @@
           <create-task class="pa-4" :parent-id="null" label="Add a task..."></create-task>
 
           <v-divider></v-divider>
-          <tasks :tasks="tasks"></tasks>
+          <sub-task-list :task="rootTask"></sub-task-list>
         </v-card>
       </v-col>
     </v-row>
@@ -28,7 +28,7 @@ import CreateTask from "@/components/task/CreateTask";
 import SubTasksMenu from "@/components/menu/SubTasksMenu";
 import SubTaskProgress from "@/components/task/SubTaskProgress";
 import TaskCounter from "@/components/task/TaskCounter";
-import Tasks from "@/components/task/Tasks";
+import SubTaskList from "@/components/task/SubTaskList";
 import { mapGetters } from "vuex";
 import taskUtils from "@/taskUtils.js";
 
@@ -38,7 +38,7 @@ export default {
     SubTasksMenu,
     SubTaskProgress,
     TaskCounter,
-    Tasks
+    SubTaskList
   },
   computed: {
     ...mapGetters(["taskTrees"]),
