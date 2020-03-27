@@ -1,5 +1,6 @@
 <template>
   <div>
+    <span class="mr-2 overline light-green--text">{{ completed }}/{{ total }}</span>
     <div class="progress-container">
       <v-progress-linear
         :value="progress"
@@ -9,7 +10,6 @@
         height="8px"
       ></v-progress-linear>
     </div>
-    <!-- <span class="caption">{{ completed }}/{{ total }}</span> -->
   </div>
 </template>
 <script>

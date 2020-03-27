@@ -31,7 +31,6 @@
             <v-spacer></v-spacer>
 
             <sub-task-progress class="mr-4" :task="task"></sub-task-progress>
-            <task-counter class="mr-4" :numTasks="numSubTasks"></task-counter>
             <sub-tasks-menu :task="task"></sub-tasks-menu>
           </v-toolbar>
 
@@ -48,7 +47,6 @@
   </v-container>
 </template>
 <script>
-import TaskCounter from "@/components/task/TaskCounter";
 import TaskBreadcrumbs from "@/components/task/TaskBreadcrumbs";
 import EditTask from "@/components/task/EditTask";
 import CreateTask from "@/components/task/CreateTask";
@@ -61,7 +59,6 @@ import taskUtils from "@/taskUtils.js";
 
 export default {
   components: {
-    TaskCounter,
     TaskBreadcrumbs,
     EditTask,
     CreateTask,

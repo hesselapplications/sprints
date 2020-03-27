@@ -8,7 +8,6 @@
             <v-spacer></v-spacer>
 
             <sub-task-progress class="mr-4" :task="rootTask"></sub-task-progress>
-            <task-counter class="mr-4" :numTasks="numSubTasks"></task-counter>
             <sub-tasks-menu :task="rootTask"></sub-tasks-menu>
           </v-toolbar>
 
@@ -27,17 +26,14 @@
 import CreateTask from "@/components/task/CreateTask";
 import SubTasksMenu from "@/components/menu/SubTasksMenu";
 import SubTaskProgress from "@/components/task/SubTaskProgress";
-import TaskCounter from "@/components/task/TaskCounter";
 import SubTaskList from "@/components/task/SubTaskList";
 import { mapGetters } from "vuex";
-import taskUtils from "@/taskUtils.js";
 
 export default {
   components: {
     CreateTask,
     SubTasksMenu,
     SubTaskProgress,
-    TaskCounter,
     SubTaskList
   },
   computed: {
@@ -50,9 +46,6 @@ export default {
         name: "All Tasks",
         children: this.tasks
       };
-    },
-    numSubTasks() {
-      return taskUtils.getNumLeafNodes(this.rootTask);
     }
   }
 };

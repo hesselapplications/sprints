@@ -9,9 +9,9 @@
 
     <!-- COMPLETE -->
     <v-list dense v-if="hasCompleteChildren">
-      <v-list-group prepend-icon="mdi-playlist-check" color="grey">
+      <v-list-group prepend-icon="mdi-playlist-check">
         <template v-slot:activator>
-          <v-list-item-title>{{ completeChildren.length }} Completed</v-list-item-title>
+          <v-list-item-title>Completed</v-list-item-title>
         </template>
         <task-list-item v-for="task in completeChildren" :key="task.id" :task="task"></task-list-item>
       </v-list-group>
@@ -20,13 +20,11 @@
 </template>
 
 <script>
-// import TaskCounter from "@/components/task/TaskCounter";
 import TaskListItem from "@/components/task/TaskListItem";
 import taskUtils from "@/taskUtils.js";
 
 export default {
   components: {
-    // TaskCounter,
     TaskListItem
   },
   props: {
