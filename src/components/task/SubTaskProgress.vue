@@ -38,7 +38,7 @@ export default {
 </script>
 <style scoped>
 .progress-container {
-  width: 50px;
+  width: 40px;
   display: inline-block;
 }
 </style>
