@@ -10,7 +10,7 @@
 import BaseMenu from "@/components/menu/BaseMenu";
 import TaskCounter from "@/components/task/TaskCounter";
 import taskUtils from "@/taskUtils.js";
-import { mapMutations } from "vuex";
+import { mapActions } from "vuex";
 
 export default {
   components: {
@@ -57,7 +57,7 @@ export default {
     }
   },
   methods: {
-    ...mapMutations(["deleteIds"]),
+    ...mapActions(["deleteIds"]),
     deleteAll() {
       var ids = taskUtils.flattenTree(this.task).map(task => task.id);
       this.deleteIds(ids);

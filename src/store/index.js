@@ -1,11 +1,15 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
-import treeUtils from '@/treeUtils.js'
+import Vue from "vue"
+import Vuex from "vuex"
+import treeUtils from "@/treeUtils.js"
+import { vuexfireMutations, firestoreAction } from "vuexfire"
+import firebase from "@/firebase.js";
+import _ from "lodash";
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    tasks: [],
     items: {
       "1": {
         id: 1,
@@ -192,31 +196,7 @@ export default new Vuex.Store({
     }
   },
   mutations: {
-    saveTask(state, item) {
-      delete item.children
-
-      var isNew = item.id == null;
-      if (isNew) {
-        var ids = Object.keys(state.items);
-        var nextId = Math.max(...ids) + 1;
-        item.id = nextId;
-        Vue.set(state.items, nextId, item);
-
-      } else {
-        Vue.set(state.items, item.id, item);
-      }
-    },
-    markIdsComplete(state, {
-      ids,
-      complete
-    }) {
-      ids
-        .map(id => state.items[id])
-        .forEach(item => item.complete = complete);
-    },
-    deleteIds(state, ids) {
-      ids.forEach(id => Vue.delete(state.items, id));
-    },
+    ...vuexfireMutations,
     toggleComplete(state, id) {
 
       function markComplete(task, complete) {
@@ -240,11 +220,49 @@ export default new Vuex.Store({
       markComplete(task, !task.complete);
     }
   },
-  actions: {},
+  actions: {
+    // Bind firestore
+    bindFirestore: firestoreAction(({ bindFirestoreRef }) => {
+      return bindFirestoreRef("tasks", firebase.tasks)
+    }),
+
+    // Unbind firestore
+    unbindFirestore: firestoreAction(({ unbindFirestoreRef }) => {
+      return unbindFirestoreRef ("tasks")
+    }),
+
+    // Save task
+    saveTask: firestoreAction((context, task) => {
+      task = _.pick(task, ["complete", "dueDate", "name", "parentId"]);
+      return firebase.saveDocument(firebase.tasks, task);
+    }),
+
+    // Delete ids
+    deleteIds: firestoreAction((context, ids) => {
+      ids.forEach(id => firebase.deleteDocument(firebase.tasks, id));
+    }),
+
+    // Mark ids complete
+    markIdsComplete: firestoreAction(({ state, dispatch }, {
+      ids,
+      complete
+    }) => {
+      ids
+        .map(id => state.tasks[id])
+        .map(task => {
+          task.complete = complete;
+          return task;
+        }).forEach(task => dispatch("saveTask", task));
+    }),
+  },
   modules: {},
   getters: {
     taskTrees: state => {
-      var tasks = Object.values(state.items);
+      var tasks = state.tasks.map(task => ({
+        id: task.id,
+        ...task
+      }));
+      
       return treeUtils.buildTrees(tasks);
     },
     taskTreeMap: (state, getters) => {

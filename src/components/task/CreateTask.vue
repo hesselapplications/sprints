@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import { mapMutations } from "vuex";
+import { mapActions } from "vuex";
 
 export default {
   props: {
@@ -32,11 +32,10 @@ export default {
     };
   },
   methods: {
-    ...mapMutations(["saveTask"]),
+    ...mapActions(["saveTask"]),
     createTask() {
       if (this.name) {
         var task = {
-          id: null,
           parentId: this.parentId,
           complete: false,
           dueDate: null,

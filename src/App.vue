@@ -20,11 +20,21 @@
 <script>
 import AppNavigation from "@/components/AppNavigation";
 import BottomNav from "@/components/BottomNav";
+import { mapActions } from 'vuex'
 
 export default {
   components: {
     AppNavigation,
     BottomNav
+  },
+  methods: {
+    ...mapActions(["bindFirestore", "unbindFirestore"])
+  },
+  created() {
+    this.bindFirestore();
+  },
+  beforeDestroy() {
+    this.unbindFirestore();
   }
 };
 </script>

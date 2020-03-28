@@ -24,7 +24,7 @@
 
 <script>
 import DatePicker from "@/components/DatePicker";
-import { mapMutations } from "vuex";
+import { mapActions } from "vuex";
 
 export default {
   components: {
@@ -34,7 +34,7 @@ export default {
     task: Object
   },
   methods: {
-    ...mapMutations(["saveTask"])
+    ...mapActions(["saveTask"])
   }
 };
 </script>

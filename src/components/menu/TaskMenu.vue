@@ -3,7 +3,7 @@
 </template>
 <script>
 import BaseMenu from "@/components/menu/BaseMenu";
-import { mapMutations } from "vuex";
+import { mapActions } from "vuex";
 
 export default {
   components: {
@@ -29,7 +29,7 @@ export default {
     }
   },
   methods: {
-    ...mapMutations(["deleteIds"]),
+    ...mapActions(["deleteIds"]),
     deleteTask() {
       this.deleteIds([this.task.id]);
     }
