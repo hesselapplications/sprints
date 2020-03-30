@@ -1,5 +1,12 @@
 <template>
-  <base-menu :title="task.name" :options="options" @delete-all="deleteAll">
+  <base-menu
+    :title="task.name"
+    :options="options"
+    @delete-all="deleteTask(task)"
+    @delete-completed="deleteCompleted(task)"
+    @mark-all-complete="markAllComplete(true)"
+    @mark-all-incomplete="markAllComplete(false)"
+  >
     <template v-slot:title="{ title }">
       {{ title }}
       <task-counter class="ml-3" :numTasks="numSubTasks"></task-counter>
@@ -57,10 +64,14 @@ export default {
     }
   },
   methods: {
-    ...mapActions(["deleteIds"]),
-    deleteAll() {
-      var ids = taskUtils.flattenTree(this.task).map(task => task.id);
-      this.deleteIds(ids);
+    ...mapActions(["deleteTask", "deleteCompleted", "markComplete"]),
+    markAllComplete(complete) {
+      var payload = {
+        task: this.task,
+        complete: complete
+      };
+
+      this.markComplete(payload)
     }
   }
 };

@@ -22,47 +22,21 @@ const firestore = firebase.firestore();
 export default {
     tasks: firestore.collection("tasks"),
 
-    getCurrentTimestamp() {
-        return firebase.firestore.Timestamp.fromDate(new Date());
-    },
-
-    getDocument(document) {
-        return new Promise(
-            function (resolve, reject) {
-                document.get().then(function (documentSnapshot) {
-                    if (documentSnapshot.exists) {
-                        var data = documentSnapshot.data();
-                        Object.defineProperty(data, 'id', {
-                            value: documentSnapshot.id,
-                            writable: false
-                        });
-
-                        resolve(data);
-                    } else {
-                        var error = new Error(`Document ${documentSnapshot.ref.path} does not exist.`);
-                        reject(error);
-                    }
-                })
-            }
-        );
-    },
-
     async saveDocument(collection, document) {
-        var documentReference;
         if (document.id == null) {
             // Add new
-            documentReference = await collection.add(document);
+            return await collection.add(document);
 
         } else {
             // Update existing
-            documentReference = collection.doc(document.id);
-            documentReference.set(document);
+            var documentReference = collection.doc(document.id);
+            delete document.id
+            await documentReference.set(document);
+            return documentReference;
         }
-
-        return documentReference;
     },
 
-    deleteDocument(collection, id) {
-        return collection.doc(id).delete();
+    async deleteDocument(collection, id) {
+        return await collection.doc(id).delete();
     }
 }

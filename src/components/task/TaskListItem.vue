@@ -4,7 +4,7 @@
       <v-icon v-if="hasSubTasks" color="grey lighten-1">mdi-subdirectory-arrow-right</v-icon>
       <v-checkbox
         v-else
-        @click.stop="toggleComplete(task.id)"
+        @click.stop.prevent="toggleComplete(task)"
         v-model="task.complete"
         color="light-green"
       ></v-checkbox>
@@ -28,7 +28,7 @@
 import SubTaskProgress from "@/components/task/SubTaskProgress";
 import TaskMenu from "@/components/menu/TaskMenu";
 import SubTasksMenu from "@/components/menu/SubTasksMenu";
-import { mapMutations } from "vuex";
+import { mapActions } from "vuex";
 import taskUtils from "@/taskUtils.js";
 
 export default {
@@ -54,7 +54,7 @@ export default {
     }
   },
   methods: {
-    ...mapMutations(["toggleComplete"]),
+    ...mapActions(["toggleComplete"]),
     goToTask() {
       this.$router.push(`/tasks/${this.task.id}`);
     }

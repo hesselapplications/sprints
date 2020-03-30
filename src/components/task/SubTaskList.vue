@@ -22,6 +22,7 @@
 <script>
 import TaskListItem from "@/components/task/TaskListItem";
 import taskUtils from "@/taskUtils.js";
+import _ from "lodash";
 
 export default {
   components: {
@@ -32,10 +33,12 @@ export default {
   },
   computed: {
     completeChildren() {
-      return taskUtils.getCompleteChildren(this.task);
+      var completeChildren = taskUtils.getCompleteChildren(this.task);
+      return this.sort(completeChildren);
     },
     incompleteChildren() {
-      return taskUtils.getIncompleteChildren(this.task);
+      var incompleteChildren = taskUtils.getIncompleteChildren(this.task);
+      return this.sort(incompleteChildren);
     },
     hasCompleteChildren() {
       return this.completeChildren.length > 0;
@@ -45,6 +48,11 @@ export default {
     },
     showDivider() {
       return this.hasCompleteChildren && this.hasIncompleteChildren;
+    }
+  },
+  methods: {
+    sort(tasks) {
+      return _.sortBy(tasks, task => !taskUtils.hasChildren(task))
     }
   }
 };

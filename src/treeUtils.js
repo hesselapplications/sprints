@@ -52,6 +52,12 @@ export default {
         return path;
     },
 
+    // SIBLINGS
+    getSiblings(treeMap, node) {
+        var parent = this.getParent(treeMap, node);
+        return this.getChildren(parent).filter(child => child != node);
+    },
+
     // CHILDREN
     getChildren(node) {
         if (node == null || node.children == null) {

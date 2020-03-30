@@ -1,5 +1,5 @@
 <template>
-  <base-menu :title="task.name" :options="options" @delete-task="deleteTask"></base-menu>
+  <base-menu :title="task.name" :options="options" @delete-task="deleteTask(task)"></base-menu>
 </template>
 <script>
 import BaseMenu from "@/components/menu/BaseMenu";
@@ -29,10 +29,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions(["deleteIds"]),
-    deleteTask() {
-      this.deleteIds([this.task.id]);
-    }
+    ...mapActions(["deleteTask"])
   }
 };
 </script>

@@ -80,9 +80,10 @@ export default {
     }
   },
   created() {
-    if (this.task == null) {
-      this.$router.push("/tasks");
-    }
+    // TODO Revist, firestore doesn't load in time
+    // if (this.task == null) {
+    //   this.$router.push("/tasks");
+    // }
   }
 };
 </script>

@@ -1,7 +1,13 @@
 import treeUtils from '@/treeUtils.js'
+import _ from "lodash";
 
 export default {
     ...treeUtils,
+
+    stripInvalidProperties(task) {
+        var validProperties = ["id", "complete", "dueDate", "name", "parentId"];
+        return _.pick(task, validProperties);
+    },
     
     // CHILDREN
     getIncompleteChildren(task) {
