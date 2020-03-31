@@ -1,7 +1,7 @@
 <template>
   <v-app>
-    <!-- NAVIGATION -->
-    <app-navigation v-if="$vuetify.breakpoint.lgAndUp" />
+    <!-- TOP NAV -->
+    <top-nav v-if="$vuetify.breakpoint.lgAndUp" />
 
     <!-- CONTENT -->
     <v-content transition="slide-x-transition" class="grey lighten-2">
@@ -14,17 +14,18 @@
       </v-container>
     </v-content>
 
+    <!-- BOTTOM NAV -->
     <bottom-nav v-if="$vuetify.breakpoint.mdAndDown"></bottom-nav>
   </v-app>
 </template>
 <script>
-import AppNavigation from "@/components/nav/TopNav";
+import TopNav from "@/components/nav/TopNav";
 import BottomNav from "@/components/nav/BottomNav";
 import { mapActions } from 'vuex'
 
 export default {
   components: {
-    AppNavigation,
+    TopNav,
     BottomNav
   },
   methods: {

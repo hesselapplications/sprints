@@ -22,13 +22,13 @@ const routes = [
   {
     path: "/sprints",
     name: "Sprints",
-    component: () => import("../views/Sprints.vue")
+    component: () => import("../views/SprintsView.vue")
   },
-  // {
-  //   path: "/sprints/new",
-  //   name: "New Sprint",
-  //   component: () => import("../views/EditSprint.vue")
-  // }
+  {
+    path: "/search",
+    name: "Search",
+    component: () => import("../views/SearchView.vue")
+  }
 ]
 
 const router = new VueRouter({

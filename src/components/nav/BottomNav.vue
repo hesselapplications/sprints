@@ -5,6 +5,11 @@
       <v-icon>mdi-playlist-check</v-icon>
     </v-btn>
 
+    <v-btn to="/search">
+      <span>Search</span>
+      <v-icon>mdi-magnify</v-icon>
+    </v-btn>
+
     <v-btn to="/sprints">
       <span>Sprint</span>
       <v-icon>mdi-run-fast</v-icon>
