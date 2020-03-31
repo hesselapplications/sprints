@@ -1,5 +1,5 @@
 <template>
-  <v-bottom-navigation shift grow background-color="primary" dark>
+  <v-bottom-navigation shift grow background-color="primary" dark app>
     <v-btn to="/tasks">
       <span>Tasks</span>
       <v-icon>mdi-playlist-check</v-icon>
