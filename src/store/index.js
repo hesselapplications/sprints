@@ -9,6 +9,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    tasksLoaded: false,
     tasks: []
   },
   mutations: {
@@ -16,13 +17,15 @@ export default new Vuex.Store({
   },
   actions: {
     // Bind firestore
-    bindFirestore: firestoreAction(({ bindFirestoreRef }) => {
-      return bindFirestoreRef("tasks", firebase.tasks)
+    bindFirestore: firestoreAction(async ({ state, bindFirestoreRef }) => {
+      await bindFirestoreRef("tasks", firebase.tasks)
+      state.tasksLoaded = true
     }),
 
     // Unbind firestore
-    unbindFirestore: firestoreAction(({ unbindFirestoreRef }) => {
-      return unbindFirestoreRef ("tasks")
+    unbindFirestore: firestoreAction(async ({ state, unbindFirestoreRef }) => {
+      await unbindFirestoreRef ("tasks")
+      state.tasksLoaded = false
     }),
 
     // Save task
@@ -78,7 +81,6 @@ export default new Vuex.Store({
       var promises = taskUtils
         .flattenTree(task)
         .map(_.cloneDeep)
-        .reverse() // forces furthest children to be processed first
         .map(task => {
           task.complete = complete;
           return dispatch("saveTask", task);

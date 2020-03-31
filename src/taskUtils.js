@@ -10,19 +10,10 @@ export default {
     },
     
     // CHILDREN
-    getIncompleteChildren(task) {
-        return treeUtils.getChildren(task).filter(task => !task.complete);
+    hasCompleteChildren(task) {
+        return this.getLeafNodes(task).some(task => task.complete);
     },
-    getCompleteChildren(task) {
-        return treeUtils.getChildren(task).filter(task => task.complete);
-    },
-    getNumCompleteChildren(task) {
-        return this.getCompleteChildren(task).length;
-    },
-    getPercentCompleteChildren(task) {
-        var complete = this.getNumCompleteChildren(task);
-        var total = treeUtils.getNumChildren(task);
-        var percentComplete = (complete / total) * 100;
-        return Math.round(percentComplete);
+    hasIncompleteChildren(task) {
+        return this.getLeafNodes(task).some(task => !task.complete);
     }
 }

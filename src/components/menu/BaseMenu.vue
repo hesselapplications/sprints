@@ -19,11 +19,7 @@
       </v-btn>
     </template>
     <v-sheet>
-      <v-card-title class="subtitle-1 grey--text">
-        <slot name="title" :title="title">
-          {{ title }}
-        </slot>
-      </v-card-title>
+      <v-card-title class="subtitle-1 grey--text">{{ title }}</v-card-title>
       <v-divider></v-divider>
       <v-list>
         <v-list-item v-for="(option, index) in options" :key="index" @click="emit(option)">

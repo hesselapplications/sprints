@@ -29,7 +29,7 @@ export default {
         }
 
         traverse(node);
-        return nodes;
+        return nodes.reverse() // returns furthest children first;
     },
     getNode(treeMap, id) {
         return treeMap[id];

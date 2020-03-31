@@ -33,12 +33,14 @@ export default {
   },
   computed: {
     completeChildren() {
-      var completeChildren = taskUtils.getCompleteChildren(this.task);
-      return this.sort(completeChildren);
+      return this.sort(taskUtils
+        .getChildren(this.task)
+        .filter(task => task.complete));
     },
     incompleteChildren() {
-      var incompleteChildren = taskUtils.getIncompleteChildren(this.task);
-      return this.sort(incompleteChildren);
+      return this.sort(taskUtils
+        .getChildren(this.task)
+        .filter(task => !task.complete));
     },
     hasCompleteChildren() {
       return this.completeChildren.length > 0;

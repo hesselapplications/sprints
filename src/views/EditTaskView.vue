@@ -54,7 +54,7 @@ import SubTaskProgress from "@/components/task/SubTaskProgress";
 import SubTaskList from "@/components/task/SubTaskList";
 import TaskMenu from "@/components/menu/TaskMenu";
 import SubTasksMenu from "@/components/menu/SubTasksMenu";
-import { mapGetters } from "vuex";
+import { mapState, mapGetters } from "vuex";
 import taskUtils from "@/taskUtils.js";
 
 export default {
@@ -71,6 +71,7 @@ export default {
     id: String
   },
   computed: {
+    ...mapState(["tasksLoaded"]),
     ...mapGetters(["getTaskWithId"]),
     task() {
       return this.getTaskWithId(this.id);
@@ -79,11 +80,12 @@ export default {
       return taskUtils.getNumLeafNodes(this.task);
     }
   },
-  created() {
-    // TODO Revist, firestore doesn't load in time
-    // if (this.task == null) {
-    //   this.$router.push("/tasks");
-    // }
+  watch: {
+    tasksLoaded(tasksLoaded) {
+      if (tasksLoaded && this.task == null) {
+        this.$router.push("/tasks");
+      }
+    }
   }
 };
 </script>
