@@ -18,8 +18,8 @@
   </v-app>
 </template>
 <script>
-import AppNavigation from "@/components/AppNavigation";
-import BottomNav from "@/components/BottomNav";
+import AppNavigation from "@/components/nav/TopNav";
+import BottomNav from "@/components/nav/BottomNav";
 import { mapActions } from 'vuex'
 
 export default {
