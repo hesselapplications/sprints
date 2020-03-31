@@ -5,17 +5,25 @@
 
       <v-spacer></v-spacer>
 
-      <v-btn icon to="/search">
-        <v-icon>mdi-magnify</v-icon>
-      </v-btn>
-
-      <v-btn icon to="/tasks">
-        <v-icon>mdi-playlist-check</v-icon>
-      </v-btn>
-
-      <v-btn icon to="/sprints">
-        <v-icon>mdi-run-fast</v-icon>
-      </v-btn>
+      <v-toolbar-items>
+        <v-btn
+          v-for="(link, index) in links"
+          :key="index"
+          text
+          class="text-capitalize"
+          :to="link.to"
+        >
+          <v-icon left>{{link.icon}}</v-icon>
+          {{link.label}}
+        </v-btn>
+      </v-toolbar-items>
     </v-app-bar>
   </div>
 </template>
+<script>
+import nav from "@/mixins/nav.js";
+
+export default {
+  mixins: [nav]
+};
+</script>
