@@ -3,6 +3,7 @@
     <v-row justify="center">
       <v-col xl="6" lg="8" md="10" cols="12">
         <v-card>
+          <!-- TOOLBAR -->
           <v-toolbar class="pr-3" flat color="grey lighten-4">
             <v-toolbar-title class="title">Tasks</v-toolbar-title>
             <v-spacer></v-spacer>
@@ -13,10 +14,16 @@
 
           <v-divider></v-divider>
 
+          <!-- CREATE TASK -->
           <create-task class="pa-4" :parent-id="null" label="Add a task..."></create-task>
 
           <v-divider></v-divider>
-          <sub-task-list :task="rootTask"></sub-task-list>
+
+          <!-- TASK LIST -->
+          <sub-task-list v-if="tasksLoaded" :task="rootTask"></sub-task-list>
+
+          <!-- TASKS LOADING -->
+          <loading v-else></loading>
         </v-card>
       </v-col>
     </v-row>
@@ -27,16 +34,19 @@ import CreateTask from "@/components/task/CreateTask";
 import SubTasksMenu from "@/components/menu/SubTasksMenu";
 import SubTaskProgress from "@/components/task/SubTaskProgress";
 import SubTaskList from "@/components/task/SubTaskList";
-import { mapGetters } from "vuex";
+import Loading from "@/components/Loading";
+import { mapState, mapGetters } from "vuex";
 
 export default {
   components: {
     CreateTask,
     SubTasksMenu,
     SubTaskProgress,
-    SubTaskList
+    SubTaskList,
+    Loading
   },
   computed: {
+    ...mapState(["tasksLoaded"]),
     ...mapGetters(["taskTrees"]),
     tasks() {
       return this.taskTrees;

@@ -26,6 +26,7 @@
       <!-- SUBTASKS -->
       <v-col lg="6" cols="12">
         <v-card>
+          <!-- TOOLBAR -->
           <v-toolbar class="pr-3" flat color="grey lighten-4">
             <v-toolbar-title class="title">Subtasks</v-toolbar-title>
             <v-spacer></v-spacer>
@@ -36,11 +37,13 @@
 
           <v-divider></v-divider>
 
+          <!-- CREATE TASK -->
           <create-task class="pa-4" :parent-id="id" label="Add a subtask..."></create-task>
 
           <v-divider></v-divider>
 
-          <sub-task-list :task="task"></sub-task-list>
+          <!-- TASK LIST -->
+          <sub-task-list v-if="tasksLoaded" :task="task"></sub-task-list>
         </v-card>
       </v-col>
     </v-row>
