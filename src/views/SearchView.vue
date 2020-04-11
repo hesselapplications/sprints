@@ -9,13 +9,16 @@
           <v-divider></v-divider>
 
           <!-- RESULTS -->
-          <v-treeview v-if="tasksLoaded" ref="results" class="py-4" :search="search" :items="taskTrees" open-on-click>
-            <template v-slot:append="{ item }">
-              <v-btn icon :to="`/tasks/${item.id}`" color="grey lighten-1">
-                <v-icon>mdi-menu-right</v-icon>
-              </v-btn>
-            </template>
-          </v-treeview>
+          <v-treeview
+            v-if="tasksLoaded"
+            ref="results"
+            class="py-4"
+            :search="search"
+            :items="taskTrees"
+            hoverable
+            activatable
+            @update:active="ids => $router.push(`/tasks/${ids[0]}`)"
+          ></v-treeview>
 
           <!-- TASKS LOADING -->
           <loading v-else></loading>
