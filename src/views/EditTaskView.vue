@@ -77,7 +77,12 @@ export default {
     ...mapState(["tasksLoaded"]),
     ...mapGetters(["getTaskWithId"]),
     task() {
-      return this.getTaskWithId(this.id);
+      var task = this.getTaskWithId(this.id);
+      if (task) {
+        document.title = task.name;
+      }
+
+      return task;
     },
     numSubTasks() {
       return taskUtils.getNumLeafNodes(this.task);

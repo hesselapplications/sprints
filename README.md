@@ -1,4 +1,4 @@
-# sprints
+# subtasker
 
 ## Project setup
 ```

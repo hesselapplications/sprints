@@ -31,6 +31,11 @@ export default {
   methods: {
     ...mapActions(["bindFirestore", "unbindFirestore"])
   },
+  watch: {
+    '$route' (to) {
+      document.title = to.name || 'Subtasker';
+    }
+  },
   created() {
     this.bindFirestore();
   },
