@@ -5,7 +5,7 @@ export default {
     ...treeUtils,
 
     stripInvalidProperties(task) {
-        var validProperties = ["id", "complete", "dueDate", "name", "parentId"];
+        var validProperties = ["id", "complete", "dueDate", "name", "parentId", "inSprint"];
         return _.pick(task, validProperties);
     },
     

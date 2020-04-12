@@ -26,6 +26,7 @@ export default {
     },
     options() {
       var options = [];
+
       if (taskUtils.hasIncompleteChildren(this.task)) {
         options.push({
           text: "Mark all complete",
@@ -55,12 +56,6 @@ export default {
           class: "red--text"
         });
       }
-
-      // {
-      //   text: "Add to sprint",
-      //   emit: "add-to-sprint",
-      //   class: null
-      // },
 
       return options;
     }

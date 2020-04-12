@@ -43,6 +43,8 @@ export default new Vuex.Store({
         task.complete = taskUtils
           .getChildren(existingTask)
           .every(child => child.complete);
+
+        delete task.inSprint
       }
 
       existingTask = taskUtils.stripInvalidProperties(existingTask);
@@ -98,6 +100,20 @@ export default new Vuex.Store({
 
       await dispatch("markComplete", payload)
     }),
+
+    // Add to sprint
+    addToSprint: firestoreAction(async ({ dispatch }, task) => {
+      task = _.cloneDeep(task);
+      task.inSprint = true;
+      await dispatch("saveTask", task);
+    }),
+
+    // Remove from sprint
+    removeFromSprint: firestoreAction(async ({ dispatch }, task) => {
+      task = _.cloneDeep(task)
+      task.inSprint = false;
+      await dispatch("saveTask", task);
+    }),
   },
   modules: {},
   getters: {
@@ -112,6 +128,11 @@ export default new Vuex.Store({
     },
     taskTreeMap: (state, getters) => {
       return taskUtils.buildTreeMap(getters.taskTrees);
+    },
+    sprintTrees: (state, getters) => {
+      return state.tasks
+        .filter(task => task.inSprint)
+        .map(task => getters.getTaskWithId(task.id));
     },
     getTaskWithId: (state, getters) => id => {
       return taskUtils.getNode(getters.taskTreeMap, id);
