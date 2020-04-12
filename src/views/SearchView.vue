@@ -4,9 +4,7 @@
       <v-col xl="6" lg="8" md="10" cols="12">
         <v-card>
           <!-- SEARCH -->
-          <search class="pa-4" v-model="search"></search>
-
-          <v-divider></v-divider>
+          <search class="px-4 pt-4" v-model="search"></search>
 
           <!-- RESULTS -->
           <v-treeview

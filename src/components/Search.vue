@@ -3,9 +3,9 @@
     v-model="model"
     label="Search"
     hide-details
-    solo
     prepend-inner-icon="mdi-magnify"
-    background-color="grey lighten-3"
+    single-line
+    outlined
     flat
   ></v-text-field>
 </template>
