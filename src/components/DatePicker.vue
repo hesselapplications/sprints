@@ -11,9 +11,7 @@
         :value="formattedDate"
         :label="placeholder"
         hide-details
-        solo
-        flat
-        background-color="grey lighten-3"
+        outlined
         readonly
         v-on="on"
         @change="saveTask(task)"

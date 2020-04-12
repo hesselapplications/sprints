@@ -1,14 +1,14 @@
 <template>
   <div>
     <!-- INCOMPLETE -->
-    <v-list dense v-if="hasIncompleteChildren">
+    <v-list v-if="hasIncompleteChildren" class="py-0" dense>
       <task-list-item v-for="task in incompleteChildren" :key="task.id" :task="task"></task-list-item>
     </v-list>
 
     <v-divider v-if="showDivider"></v-divider>
 
     <!-- COMPLETE -->
-    <v-list dense v-if="hasCompleteChildren">
+    <v-list v-if="hasCompleteChildren" class="py-0" dense>
       <v-list-group prepend-icon="mdi-playlist-check">
         <template v-slot:activator>
           <v-list-item-title>Completed</v-list-item-title>

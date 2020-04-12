@@ -3,9 +3,7 @@
     v-model="name"
     :label="label"
     hide-details
-    solo
-    background-color="grey lighten-3"
-    flat
+    outlined
     @keydown.enter="createTask"
   >
     <template v-slot:append>

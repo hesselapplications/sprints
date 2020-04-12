@@ -7,9 +7,7 @@
           v-model="task.name"
           label="Name"
           hide-details
-          solo
-          flat
-          background-color="grey lighten-3"
+          outlined
           @change="saveTask(task)"
         ></v-text-field>
       </v-col>
