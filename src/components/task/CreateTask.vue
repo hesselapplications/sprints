@@ -1,16 +1,8 @@
 <template>
-  <v-text-field
-    v-model="name"
-    :label="label"
-    hide-details
-    outlined
-    @keydown.enter="createTask"
-  >
+  <v-text-field v-model="name" :label="label" hide-details outlined @keydown.enter="createTask">
     <template v-slot:append>
       <v-fade-transition>
-        <v-btn v-show="name" icon color="primary" @click="createTask">
-          <v-icon>mdi-plus</v-icon>
-        </v-btn>
+        <v-icon v-show="name" color="primary" @click="createTask">mdi-plus</v-icon>
       </v-fade-transition>
     </template>
   </v-text-field>
