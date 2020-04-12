@@ -38,7 +38,7 @@
           <v-divider></v-divider>
 
           <!-- CREATE TASK -->
-          <create-task class="pa-4 pb-2" :parent-id="id" label="Add a subtask..."></create-task>
+          <create-task class="pa-4" :parent-id="id" label="Add a subtask..."></create-task>
 
           <!-- TASK LIST -->
           <sub-task-list v-if="tasksLoaded" :task="task"></sub-task-list>
