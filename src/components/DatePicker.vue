@@ -56,8 +56,8 @@ export default {
   computed: {
     formattedDate: {
       get() {
-        return this.model === null
-          ? this.placeholder
+        return this.model == null
+          ? null
           : moment(this.model).format("MMM Do YYYY");
       },
       set(date) {

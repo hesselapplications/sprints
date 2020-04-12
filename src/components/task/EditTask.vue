@@ -2,7 +2,7 @@
   <v-container fluid>
     <v-row dense>
       <!-- NAME -->
-      <v-col cols="8">
+      <v-col lg="8" md="9" sm="8" cols="7">
         <v-text-field
           v-model="editTask.name"
           label="Name"
@@ -12,7 +12,7 @@
       </v-col>
 
       <!-- DUE DATE -->
-      <v-col cols="4">
+      <v-col lg="4" md="3" sm="4" cols="5">
         <date-picker v-model="editTask.dueDate" placeholder="Due Date" clearable></date-picker>
       </v-col>
     </v-row>
