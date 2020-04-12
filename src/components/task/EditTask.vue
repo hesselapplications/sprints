@@ -4,17 +4,16 @@
       <!-- NAME -->
       <v-col cols="8">
         <v-text-field
-          v-model="task.name"
+          v-model="editTask.name"
           label="Name"
           hide-details
           outlined
-          @change="saveTask(task)"
         ></v-text-field>
       </v-col>
 
       <!-- DUE DATE -->
       <v-col cols="4">
-        <date-picker v-model="task.dueDate" placeholder="Due Date" clearable></date-picker>
+        <date-picker v-model="editTask.dueDate" placeholder="Due Date" clearable></date-picker>
       </v-col>
     </v-row>
   </v-container>
@@ -22,6 +21,7 @@
 
 <script>
 import DatePicker from "@/components/DatePicker";
+import _ from "lodash";
 import { mapActions } from "vuex";
 
 export default {
@@ -31,8 +31,16 @@ export default {
   props: {
     task: Object
   },
+  data() {
+    return {
+      editTask: _.cloneDeep(this.task)
+    }
+  },
   methods: {
     ...mapActions(["saveTask"])
+  },
+  beforeDestroy() {
+    this.saveTask(this.editTask);
   }
 };
 </script>
