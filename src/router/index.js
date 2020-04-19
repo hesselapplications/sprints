@@ -6,7 +6,7 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: "/",
-    redirect: "/tasks"
+    redirect: "/sprints"
   },
   {
     path: "/tasks/:id",
@@ -28,6 +28,16 @@ const routes = [
     path: "/search",
     name: "Search",
     component: () => import("../views/SearchView.vue")
+  },
+  {
+    path: "/sign-in",
+    name: "Sign In",
+    component: () => import("../views/SignInView.vue")
+  },
+  {
+    path: "/account",
+    name: "Account",
+    component: () => import("../views/AccountView.vue")
   }
 ]
 

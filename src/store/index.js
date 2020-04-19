@@ -9,13 +9,29 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    user: null,
     tasksLoaded: false,
     tasks: []
   },
   mutations: {
-    ...vuexfireMutations
+    ...vuexfireMutations,
+    setUser(state, user) {
+      state.user = user;
+    }
   },
   actions: {
+    // Sign in
+    async signIn({ commit }) {
+      var result = await firebase.signIn();
+      commit("setUser", result.user);
+    },
+
+    // Sign out
+    async signOut({ commit }) {
+      await firebase.signOut();
+      commit("setUser", null);
+    },
+
     // Bind firestore
     bindFirestore: firestoreAction(async ({ state, bindFirestoreRef }) => {
       await bindFirestoreRef("tasks", firebase.tasks)

@@ -1,10 +1,6 @@
 <template>
   <v-bottom-navigation shift grow background-color="primary" dark app>
-    <v-btn
-      v-for="(link, index) in links"
-      :key="index"
-      :to="link.to"
-    >
+    <v-btn v-for="(link, index) in links" :key="index" :to="link.to">
       <span>{{link.label}}</span>
       <v-icon>{{link.icon}}</v-icon>
     </v-btn>
