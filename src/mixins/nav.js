@@ -1,10 +1,14 @@
-import { mapState, mapActions } from "vuex";
+import { mapState } from "vuex";
 
 export default {
   computed: {
     ...mapState(["user"]),
     links() {
-      var links = [
+      if (!this.user) {
+        return []
+      }
+
+      return [
         {
           to: "/tasks",
           label: "Tasks",
@@ -19,28 +23,13 @@ export default {
           to: "/sprints",
           label: "Sprints",
           icon: "mdi-run-fast"
-        }
-      ];
-
-      if (this.user) {
-        links.push({
+        },
+        {
           to: "/account",
           label: "Account",
           icon: "mdi-account"
-        });
-
-      } else {
-        links.push({
-          to: "/sign-in",
-          label: "Sign In",
-          icon: "mdi-login-variant"
-        });
-      }
-
-      return links;
+        }
+      ];
     }
-  },
-  methods: {
-    ...mapActions(["signIn"])
   }
 }

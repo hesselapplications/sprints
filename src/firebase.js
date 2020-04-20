@@ -28,6 +28,16 @@ firebase.auth().onAuthStateChanged(function (user) {
 export default {
     tasks: firestore.collection("tasks"),
 
+    async userSignedIn() {
+        return new Promise((resolve, reject) => {
+            const unsubscribe = firebase.auth().onAuthStateChanged(user => {
+                unsubscribe();
+                var userSignedIn = user != null;
+                resolve(userSignedIn);
+            }, reject);
+        })
+    },
+
     async signIn() {
         var provider = new firebase.auth.GoogleAuthProvider();
         return await firebase.auth().signInWithPopup(provider);
