@@ -28,6 +28,19 @@ firebase.auth().onAuthStateChanged(function (user) {
 export default {
     tasks: firestore.collection("tasks"),
 
+    async importData(json) {
+        var data = JSON.parse(json);
+        
+        var batch = firestore.batch();
+
+        data.tasks.forEach(task => {
+            var ref = this.tasks.doc(task.id);
+            batch.set(ref, task);
+        })
+
+        await batch.commit()
+    },
+
     async userSignedIn() {
         return new Promise((resolve, reject) => {
             const unsubscribe = firebase.auth().onAuthStateChanged(user => {

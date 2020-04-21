@@ -5,11 +5,10 @@
 
       <v-divider></v-divider>
 
-      <!-- DATA INPUT -->
+      <!-- JSON INPUT -->
       <v-textarea
         class="pt-0 mt-0"
-        v-model="data"
-        :placeholder="placeholder"
+        v-model="json"
         :readonly="importingData"
         autofocus
         hide-details
@@ -32,14 +31,14 @@
 </template>
 <script>
 import vmodel from "@/mixins/vmodel.js";
+import firebase from "@/firebase.js"
 
 export default {
   mixins: [vmodel],
   data() {
     return {
       importingData: false,
-      data: null,
-      dataFormat: {
+      exampleData: {
         tasks: [
           {
             id: "1",
@@ -54,23 +53,34 @@ export default {
             dueDate: "yyyy-mm-dd"
           }
         ]
-      }
+      },
+      json: null
     };
   },
   computed: {
-    placeholder() {
-      return JSON.stringify(this.dataFormat, null, "   ");
+    exampleJson() {
+      return JSON.stringify(this.exampleData, null, "   ");
+    }
+  },
+  watch: {
+    model() {
+      this.json = this.exampleJson;
     }
   },
   methods: {
     close() {
       this.model = false;
-      this.data = null;
       this.importingData = false;
     },
     async importData() {
-      this.importingData = true;
-      await new Promise(resolve => setTimeout(resolve, 2000));
+      try {
+        this.importingData = true;
+        await firebase.importData(this.json);  
+        
+      } catch (error) {
+        console.log(error)
+      }
+      
       this.close();
     }
   }

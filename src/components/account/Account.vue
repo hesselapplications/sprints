@@ -60,7 +60,7 @@ export default {
         },
         {
           title: "Delete account",
-          subtitle: "Permanently deletes all data",
+          subtitle: "Permanently deletes account and all data",
           icon: "mdi-delete",
           emit: "delete-account"
         }
