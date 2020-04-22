@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { mapActions, mapState } from "vuex";
 
 export default {
   props: {
@@ -21,15 +21,20 @@ export default {
       name: null
     };
   },
+  computed: {
+    ...mapState(["user"])
+  },
   methods: {
     ...mapActions(["saveTask"]),
     createTask() {
       if (this.name) {
         var task = {
           parentId: this.parentId,
+          inSprint: false,
           complete: false,
           dueDate: null,
-          name: this.name
+          name: this.name,
+          userId: this.user.uid
         };
 
         this.saveTask(task);

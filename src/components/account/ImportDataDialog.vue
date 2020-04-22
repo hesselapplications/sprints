@@ -31,7 +31,7 @@
 </template>
 <script>
 import vmodel from "@/mixins/vmodel.js";
-import firebase from "@/firebase.js"
+import firebase from "@/firebase.js";
 
 export default {
   mixins: [vmodel],
@@ -75,12 +75,14 @@ export default {
     async importData() {
       try {
         this.importingData = true;
-        await firebase.importData(this.json);  
-        
+        var data = JSON.parse(this.json);
+        await firebase.batchSave(firebase.tasks, data.tasks);
+        this.$root.$emit("showMessage", "Successfully imported data");
+
       } catch (error) {
-        console.log(error)
+        this.$root.$emit("showMessage", "Failed to import data");
       }
-      
+
       this.close();
     }
   }

@@ -3,6 +3,7 @@ import * as firebase from "firebase/app";
 import "firebase/firestore";
 import "firebase/analytics";
 import "firebase/auth";
+import _ from "lodash";
 
 // Your web app's Firebase configuration
 var firebaseConfig = {
@@ -28,19 +29,6 @@ firebase.auth().onAuthStateChanged(function (user) {
 export default {
     tasks: firestore.collection("tasks"),
 
-    async importData(json) {
-        var data = JSON.parse(json);
-        
-        var batch = firestore.batch();
-
-        data.tasks.forEach(task => {
-            var ref = this.tasks.doc(task.id);
-            batch.set(ref, task);
-        })
-
-        await batch.commit()
-    },
-
     async userSignedIn() {
         return new Promise((resolve, reject) => {
             const unsubscribe = firebase.auth().onAuthStateChanged(user => {
@@ -58,6 +46,24 @@ export default {
 
     async signOut() {
         return await firebase.auth().signOut();
+    },
+
+    async batchSave(collection, documents) {
+        var chunks = _.chunk(documents, 500);
+        if (chunks.length == 0) {
+            return;
+        }
+
+        for (const chunk of chunks) {
+            var batch = firestore.batch();
+            for (const document of chunk) {
+                var id = document.id;
+                var ref = id ? collection.doc(id) : collection.doc();
+                batch.set(ref, document);
+            }
+
+            await batch.commit();
+        }
     },
 
     async saveDocument(collection, document) {

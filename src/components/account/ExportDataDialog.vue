@@ -31,19 +31,23 @@ export default {
   computed: {
     ...mapState(["tasks"]),
     data() {
-      return JSON.stringify(
-        {
-          tasks: this.tasks
-        },
-        null,
-        "   "
-      );
+      var data = {
+        tasks: this.tasks.map(task => {
+          return {
+            id: task.id,
+            ...task
+          }
+        })
+      };
+
+      return JSON.stringify(data, null, "   ");
     }
   },
   methods: {
     copyData() {
       copy(this.data);
       this.model = false;
+      this.$root.$emit("showMessage", "Copied data to clipboard");
     }
   }
 };
