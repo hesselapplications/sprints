@@ -14,8 +14,14 @@
       <v-list-item-title>{{task.name}}</v-list-item-title>
     </v-list-item-content>
 
-    <v-list-item-action>
-      <sub-task-progress v-if="hasSubTasks" :task="task"></sub-task-progress>
+    <v-list-item-action v-if="showSprintIndicator">
+      <v-btn small color="primary" icon to="/sprints">
+        <v-icon small color="primary">mdi-run-fast</v-icon>
+      </v-btn>
+    </v-list-item-action>
+
+    <v-list-item-action v-if="hasSubTasks">
+      <sub-task-progress :task="task"></sub-task-progress>
     </v-list-item-action>
 
     <v-list-item-action>
@@ -49,8 +55,11 @@ export default {
     },
     classes() {
       return {
-        "complete": this.task.complete
+        complete: this.task.complete
       };
+    },
+    showSprintIndicator() {
+      return this.$route.path != "/sprints" && this.task.inSprint;
     }
   },
   methods: {

@@ -64,7 +64,11 @@ router.beforeEach(async (to, from, next) => {
   const requiresAuth = to.matched.some(route => route.meta.requiresAuth);
   const userSignedIn = await firebase.userSignedIn();
   if (requiresAuth && !userSignedIn) {
-    next('sign-in');
+    next("sign-in");
+
+  } else if (to.name == "Sign In" && userSignedIn) {
+    next("/")
+
   } else {
     next();
   }

@@ -1,4 +1,5 @@
 import store from "@/store"
+import router from "@/router"
 import * as firebase from "firebase/app";
 import "firebase/firestore";
 import "firebase/analytics";
@@ -24,6 +25,12 @@ const firestore = firebase.firestore();
 
 firebase.auth().onAuthStateChanged(function (user) {
     store.commit('setUser', user);
+    if (user) {
+        store.dispatch("bindFirestore");
+
+    } else {
+        store.dispatch("unbindFirestore");
+    }
 });
 
 export default {
@@ -41,11 +48,12 @@ export default {
 
     async signIn() {
         var provider = new firebase.auth.GoogleAuthProvider();
-        return await firebase.auth().signInWithPopup(provider);
+        await firebase.auth().signInWithRedirect(provider);
     },
 
     async signOut() {
-        return await firebase.auth().signOut();
+        await firebase.auth().signOut();
+        router.push("sign-in");
     },
 
     async batchSave(collection, documents) {
@@ -81,6 +89,8 @@ export default {
     },
 
     async deleteDocument(collection, id) {
-        return await collection.doc(id).delete();
+        if (id) {
+            return await collection.doc(id).delete();
+        }
     }
 }

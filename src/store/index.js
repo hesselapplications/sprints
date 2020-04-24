@@ -34,7 +34,7 @@ export default new Vuex.Store({
 
     // Bind firestore
     bindFirestore: firestoreAction(async ({ state, bindFirestoreRef }) => {
-      await bindFirestoreRef("tasks", firebase.tasks)
+      await bindFirestoreRef("tasks", firebase.tasks.where("userId", "==", state.user.uid))
       state.tasksLoaded = true
     }),
 

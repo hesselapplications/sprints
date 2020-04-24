@@ -1,35 +1,46 @@
-import { mapState } from "vuex";
+import {
+  mapState,
+  mapGetters
+} from "vuex";
 
 export default {
   computed: {
     ...mapState(["user"]),
+    ...mapGetters(["taskTrees"]),
     links() {
       if (!this.user) {
         return []
       }
 
-      return [
-        {
-          to: "/tasks",
-          label: "Tasks",
-          icon: "mdi-playlist-check"
-        },
-        {
+      var links = [];
+
+      links.push({
+        to: "/tasks",
+        label: "Tasks",
+        icon: "mdi-playlist-check"
+      });
+
+      if (this.taskTrees.length > 0) {
+        links.push({
           to: "/search",
           label: "Search",
           icon: "mdi-magnify"
-        },
-        {
-          to: "/sprints",
-          label: "Sprints",
-          icon: "mdi-run-fast"
-        },
-        {
-          to: "/account",
-          label: "Account",
-          icon: "mdi-account"
-        }
-      ];
+        });
+      }
+
+      links.push({
+        to: "/sprints",
+        label: "Sprints",
+        icon: "mdi-run-fast"
+      });
+
+      links.push({
+        to: "/account",
+        label: "Account",
+        icon: "mdi-account"
+      });
+
+      return links;
     }
   }
 }

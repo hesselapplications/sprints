@@ -5,13 +5,7 @@
 
     <!-- CONTENT -->
     <v-content transition="slide-x-transition" class="grey lighten-2">
-      <v-container fluid class="app-container">
-        <v-row justify="center" no-gutters>
-          <v-col>
-            <router-view :key="$route.fullPath" />
-          </v-col>
-        </v-row>
-      </v-container>
+      <router-view :key="$route.fullPath" />
     </v-content>
 
     <!-- MESSAGES -->
@@ -27,7 +21,7 @@
 <script>
 import TopNav from "@/components/nav/TopNav";
 import BottomNav from "@/components/nav/BottomNav";
-import { mapActions } from "vuex";
+import { mapActions, mapState } from "vuex";
 
 export default {
   components: {
@@ -40,8 +34,11 @@ export default {
       snackbarMessage: ""
     };
   },
+  computed: {
+    ...mapState(["user"])
+  },
   methods: {
-    ...mapActions(["bindFirestore", "unbindFirestore"])
+    ...mapActions(["unbindFirestore"])
   },
   watch: {
     $route(to) {
@@ -49,8 +46,6 @@ export default {
     }
   },
   created() {
-    this.bindFirestore();
-
     this.$root.$on("showMessage", snackbarMessage => {
       this.snackbar = false;
       this.snackbarMessage = snackbarMessage;
