@@ -15,7 +15,7 @@
     </v-snackbar>
 
     <!-- BOTTOM NAV -->
-    <bottom-nav v-if="$vuetify.breakpoint.mdAndDown"></bottom-nav>
+    <bottom-nav v-if="user && $vuetify.breakpoint.mdAndDown"></bottom-nav>
   </v-app>
 </template>
 <script>
