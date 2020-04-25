@@ -4,15 +4,7 @@
     <v-list v-if="hasIncompleteChildren" class="py-0" dense>
       <task-list-item v-for="task in incompleteChildren" :key="task.id" :task="task"></task-list-item>
     </v-list>
-    <div v-else class="pa-4 text-center">
-      <v-avatar color="primary lighten-5" size="80px">
-        <v-icon color="primary lighten-1" size="48px">mdi-sofa</v-icon>
-      </v-avatar>
-      <div class="pt-2">
-        <div class="title">All done!</div>
-        <div class="caption">Sit back and relax</div>
-      </div>
-    </div>
+    <empty-state v-else class="pa-4" icon="mdi-sofa" title="All Done!" subtitle="Sit back and relax"></empty-state>
 
     <v-divider></v-divider>
 
@@ -29,12 +21,14 @@
 </template>
 
 <script>
+import EmptyState from "@/components/EmptyState";
 import TaskListItem from "@/components/task/TaskListItem";
 import taskUtils from "@/taskUtils.js";
 import _ from "lodash";
 
 export default {
   components: {
+    EmptyState,
     TaskListItem
   },
   props: {

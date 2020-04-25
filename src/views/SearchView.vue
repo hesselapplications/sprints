@@ -4,19 +4,16 @@
       <v-col xl="6" lg="8" md="10" cols="12">
         <v-card>
           <!-- SEARCH -->
-          <search class="px-4 pt-4" v-model="search"></search>
+          <search-box class="pa-4" v-model="search"></search-box>
 
           <!-- RESULTS -->
-          <v-treeview
+          <search-results
             v-if="tasksLoaded"
-            ref="results"
-            class="py-4"
+            v-show="search"
+            class="pb-4"
             :search="search"
-            :items="taskTrees"
-            hoverable
-            activatable
-            @update:active="ids => $router.push(`/tasks/${ids[0]}`)"
-          ></v-treeview>
+            :results="results"
+          ></search-results>
 
           <!-- TASKS LOADING -->
           <loading v-else></loading>
@@ -26,31 +23,42 @@
   </v-container>
 </template>
 <script>
-import Search from "@/components/Search";
 import Loading from "@/components/Loading";
+import SearchBox from "@/components/search/SearchBox";
+import SearchResults from "@/components/search/SearchResults";
 import { mapState, mapGetters } from "vuex";
+import _ from "lodash";
 
 export default {
   components: {
-    Search,
-    Loading
+    Loading,
+    SearchBox,
+    SearchResults
   },
   data() {
     return {
       search: null
     };
   },
-  watch: {
-    search(search) {
-      var searching = search.length > 0;
-      if (this.tasksLoaded) {
-        this.$refs.results.updateAll(searching);
-      }
-    }
-  },
   computed: {
     ...mapState(["tasksLoaded"]),
-    ...mapGetters(["taskTrees"])
+    ...mapGetters(["taskTrees"]),
+    nullSafeSearch() {
+      return this.search || "";
+    },
+    results() {
+      return _.cloneDeep(this.taskTrees).filter(this.isNestedMatch);
+    }
+  },
+  methods: {
+    isNestedMatch(task) {
+      task.children = task.children || [];
+      task.children = task.children.filter(this.isNestedMatch);
+
+      var isMatch = _.includes(_.toLower(task.name), _.toLower(this.search));
+      var hasMatchingChildren = task.children.length > 0;
+      return isMatch || hasMatchingChildren;
+    }
   }
 };
 </script>

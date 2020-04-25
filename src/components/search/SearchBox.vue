@@ -5,6 +5,7 @@
     hide-details
     prepend-inner-icon="mdi-magnify"
     single-line
+    clearable
     outlined
     flat
   ></v-text-field>
